@@ -9,18 +9,40 @@ const SignUp = () => {
   const [year, setYear] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // 👈 NEW
   const [responseMsg, setResponseMsg] = useState('');
+  const [passwordError, setPasswordError] = useState(''); // 👈 NEW
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // 👈 NEW: Password validation function
+  const validatePasswords = () => {
+    if (password !== confirmPassword) {
+      setPasswordError("❌ Passwords do not match");
+      return false;
+    }
+    if (password.length < 6) {
+      setPasswordError("❌ Password must be at least 6 characters");
+      return false;
+    }
+    setPasswordError('');
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // 👈 NEW: Check password match before sending
+    if (!validatePasswords()) {
+      return;
+    }
+    
     setLoading(true);
 
     try {
       const response = await axios.post("https://codevibe-3.onrender.com/api/auth/register", {
         username,
-        Email: email,   // ✅ lowercase, same as Dashboard
+        Email: email,
         password,
         college,
         year,
@@ -30,7 +52,6 @@ const SignUp = () => {
       setResponseMsg(response.data.message);
 
       if (response.data.success) {
-        // ✅ signup ke baad direct Dashboard me bhejna
         localStorage.setItem("user", JSON.stringify(response.data.user));
         navigate("/Dashboard");
       }
@@ -50,7 +71,7 @@ const SignUp = () => {
         </div>
         <div className="login-card">
           <form className="login-form" onSubmit={handleSubmit}>
-            <h1>Join Us Today ! </h1>
+            <h1>Join Us Today !</h1>
 
             <label>USERNAME:</label>
             <input
@@ -95,7 +116,28 @@ const SignUp = () => {
               *Password must be at least 6 characters long
             </p>
 
-            <button type="submit">SUBMIT</button>
+            {/* 👈 NEW: Confirm Password Field */}
+            <label>CONFIRM PASSWORD:</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                setPasswordError(''); // Clear error when user types
+              }}
+              required
+            />
+
+            {/* 👈 NEW: Password mismatch error message */}
+            {passwordError && (
+              <p style={{ color: "#ff6b6b", fontSize: "0.85rem", marginTop: "-10px", marginBottom: "15px", textAlign: "left" }}>
+                {passwordError}
+              </p>
+            )}
+
+            <button type="submit" disabled={loading}>
+              {loading ? "LOADING..." : "SUBMIT"}
+            </button>
 
             {responseMsg && <p style={{ color: "white" }}>{responseMsg}</p>}
 
