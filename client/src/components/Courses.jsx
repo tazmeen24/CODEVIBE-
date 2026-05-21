@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import FAQ from "./FAQ";
 
 // Images
 import htmlLogo from '../assets/htmlLogo.png';
@@ -432,6 +433,7 @@ const Courses = () => {
           </p>
         </div>
       )}
+      <FAQ/>
     </div>
   );
 };

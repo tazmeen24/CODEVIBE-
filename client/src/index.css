@@ -2686,3 +2686,78 @@ feat/scroll-to-top-button .scroll-to-top {
     transform: translateY(0);
   }
 }
+
+
+
+.faq-section {
+  padding: 4rem 1.5rem;
+  max-width: 800px;
+  margin: auto;
+}
+
+.faq-section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.faq-container {
+  display: flex;
+  flex-direction: column;
+  background-color:  #0a0e27;
+  gap: 1rem;
+}
+
+.faq-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  transition: 0.3s ease;
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background:  #0a0e27;
+  /*background: transparent;*/
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.faq-question:hover {
+  background: rgba(49, 43, 42, 0);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+}
+
+.faq-answer.open {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.faq-answer p {
+  padding: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 2rem 1rem;
+  }
+
+  .faq-section h2 {
+    font-size: 1.5rem;
+  }
+}
