@@ -65,7 +65,7 @@ header {
 }
 
 /* Header glow animation */
-header::before {
+header::before, .site-header::before {
   content: '';
   position: absolute;
   top: -50%;
@@ -75,6 +75,16 @@ header::before {
   background: radial-gradient(circle, rgba(255, 77, 109, 0.1) 0%, transparent 70%);
   animation: headerGlow 4s ease-in-out infinite;
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  header::before, .site-header::before {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+  }
 }
 
 @keyframes headerGlow {
