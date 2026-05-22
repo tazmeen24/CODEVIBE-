@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import Compiler from './Compiler';
 
@@ -12,12 +13,34 @@ const DSALesson5 = () => {
     window.scrollTo(0, 0);
     const email = localStorage.getItem('userEmail') || 'guest';
     const savedPractice = localStorage.getItem(`dsaPractice_${email}`);
+    let localPractice = {};
     if (savedPractice) {
       try {
-        setPracticeCompleted(JSON.parse(savedPractice));
+        localPractice = JSON.parse(savedPractice);
+        setPracticeCompleted(localPractice);
       } catch (e) {
         console.error('Error parsing practice progress', e);
       }
+    }
+
+    if (email !== 'guest') {
+      axios.get(`http://localhost:5002/api/progress/${email}`)
+        .then(res => {
+          const completedFromBackend = res.data?.completedLessons || [];
+          let hasUpdates = false;
+          const mergedPractice = { ...localPractice };
+          completedFromBackend.forEach(problemId => {
+            if (!mergedPractice[problemId]) {
+              mergedPractice[problemId] = true;
+              hasUpdates = true;
+            }
+          });
+          if (hasUpdates) {
+            setPracticeCompleted(mergedPractice);
+            localStorage.setItem(`dsaPractice_${email}`, JSON.stringify(mergedPractice));
+          }
+        })
+        .catch(err => console.error('Error syncing practice progress from backend:', err));
     }
   }, []);
 
@@ -26,6 +49,12 @@ const DSALesson5 = () => {
       const email = localStorage.getItem('userEmail') || 'guest';
       const updated = { ...prev, [problemId]: !prev[problemId] };
       localStorage.setItem(`dsaPractice_${email}`, JSON.stringify(updated));
+
+      if (updated[problemId]) {
+        axios.post(`http://localhost:5002/api/lesson/${problemId}/complete`, { email, score: 100 })
+          .catch(err => console.error("Save practice progress error:", err));
+      }
+
       return updated;
     });
   };
