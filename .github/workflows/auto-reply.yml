@@ -20,7 +20,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const message = "Project maintainer is currently offline.\n\nYour issue/PR will be reviewed after 22nd May.\n\nThanks for your patience.";
+            const message = "Project maintainer is currently offline.\n\nYour issue/PR will be reviewed after 26nd May.\n\nThanks for your patience.";
 
             const issueNumber = context.payload.issue
               ? context.payload.issue.number
