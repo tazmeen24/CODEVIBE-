@@ -2,7 +2,7 @@
 
 This leaderboard is generated automatically for `tazmeen24/CODEVIBE-` by GitHub Actions.
 
-Last updated: 2026-06-16
+Last updated: 2026-06-17
 
 ## Scoring
 
@@ -25,7 +25,7 @@ Last updated: 2026-06-16
 | 9 | [@Mahi-19-design](https://github.com/Mahi-19-design) | 10 | 5 | 0 | 0 |
 | 10 | [@sofeel](https://github.com/sofeel) | 8 | 4 | 0 | 0 |
 | 11 | [@ArshiBansal](https://github.com/ArshiBansal) | 6 | 3 | 0 | 0 |
-| 12 | [@divyagsharma2006-blip](https://github.com/divyagsharma2006-blip) | 6 | 3 | 0 | 0 |
+| 12 | [@divyaa404](https://github.com/divyaa404) | 6 | 3 | 0 | 0 |
 | 13 | [@jagrati7305](https://github.com/jagrati7305) | 6 | 3 | 0 | 0 |
 | 14 | [@pratiyushraj007-Dev](https://github.com/pratiyushraj007-Dev) | 6 | 3 | 0 | 0 |
 | 15 | [@shreyamevada6](https://github.com/shreyamevada6) | 6 | 3 | 0 | 0 |
